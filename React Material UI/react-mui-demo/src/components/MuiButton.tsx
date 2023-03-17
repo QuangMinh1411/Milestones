@@ -1,6 +1,17 @@
-import { Stack, Button,IconButton } from "@mui/material"
+import { Stack, Button,IconButton,ButtonGroup,ToggleButton,ToggleButtonGroup} from "@mui/material"
 import SendIcon from '@mui/icons-material/Send';
+import { FormatBold,FormatItalic,FormatUnderlined } from "@mui/icons-material";
+import React, { useState } from "react";
+
 export const MuiButton = () => {
+    const [formats,setFormats] = useState<string|null>(null)
+    const handleFormat = (_event:React.MouseEvent<HTMLElement>,updatedFormats: string|null)=>{
+        setFormats(updatedFormats);
+        
+    }
+    console.log({
+        formats
+    })
   return (
     <Stack spacing={4}>
         <Stack spacing={2} direction='row'>
@@ -27,6 +38,21 @@ export const MuiButton = () => {
             <IconButton aria-label="send" color="success" size='small'>
                 <SendIcon />
             </IconButton>
+        </Stack>
+        <Stack direction='row'>
+            <ButtonGroup variant="text" orientation="vertical" size="small" color="success" aria-label="alignment button group">
+            <Button onClick={()=>alert('Left Click')} >Left</Button>
+            <Button >Middle</Button>
+            <Button>Right</Button>
+            </ButtonGroup>
+        </Stack>
+        <Stack direction='row'>
+            <ToggleButtonGroup aria-label="text formating" value={formats} onChange={handleFormat} size="small" color='success'
+            exclusive >
+            <ToggleButton value='bold' aria-label="bold"><FormatBold /></ToggleButton>
+            <ToggleButton value='italic' aria-label="italic"><FormatItalic /></ToggleButton>
+            <ToggleButton value='underlined' aria-label="underlined"><FormatUnderlined /></ToggleButton>
+            </ToggleButtonGroup>
         </Stack>
     </Stack>
     
